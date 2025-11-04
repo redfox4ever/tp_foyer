@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.ChambreDTO;
 import tn.esprit.tp_foyer.Entities.Chambre;
 
 import tn.esprit.tp_foyer.Services.IChambreService;
@@ -15,9 +16,8 @@ public class ChambreRestController {
     IChambreService chambreService;
     // http://localhost:8089/tpfoyer/chambre/retrieve-all-chambres
     @GetMapping("/retrieve-all-chambres")
-    public List<Chambre> getChambres() {
-        List<Chambre> listChambres = chambreService.retrieveAllChambres();
-        return listChambres;
+    public List<ChambreDTO> getChambres() {
+        return chambreService.retrieveAllChambres();
     }
     // http://localhost:8089/tpfoyer/chambre/retrieve-chambre/8
     @GetMapping("/retrieve-chambre/{chambre-id}")

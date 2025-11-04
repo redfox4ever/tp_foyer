@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.UniversiteDTO;
 import tn.esprit.tp_foyer.Entities.Universite;
 import tn.esprit.tp_foyer.Services.IUniversiteService;
 
@@ -15,7 +16,7 @@ public class UniversiteRestController {
 
     // http://localhost:8089/tpfoyer/universite/retrieve-all-universites
     @GetMapping("/retrieve-all-universites")
-    public List<Universite> getUniversites() {
+    public List<UniversiteDTO> getUniversites() {
         return universiteService.retrieveAllUniversites();
     }
 

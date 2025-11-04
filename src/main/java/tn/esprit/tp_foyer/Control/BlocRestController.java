@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.Entities.Bloc;
 import tn.esprit.tp_foyer.Services.IBlocService;
 
@@ -15,13 +16,13 @@ public class BlocRestController {
 
     // http://localhost:8089/tpfoyer/bloc/retrieve-all-blocs
     @GetMapping("/retrieve-all-blocs")
-    public List<Bloc> getBlocs() {
+    public List<BlocDTO> getBlocs() {
         return blocService.retrieveAllBlocs();
     }
 
     // http://localhost:8089/tpfoyer/bloc/retrieve-bloc/{bloc-id}
     @GetMapping("/retrieve-bloc/{bloc-id}")
-    public Bloc retrieveBloc(@PathVariable("bloc-id") Long blocId) {
+    public BlocDTO retrieveBloc(@PathVariable("bloc-id") Long blocId) {
         return blocService.retrieveBloc(blocId);
     }
 

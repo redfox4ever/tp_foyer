@@ -17,7 +17,7 @@ import java.util.Set;
 public class Reservation {
     @Id
     String idReservation;
-    Date nomBloc;
+    Date anneeUniversitaire;
     boolean estValide;
     @ManyToMany
     private Set<Etudiant> etudiants;

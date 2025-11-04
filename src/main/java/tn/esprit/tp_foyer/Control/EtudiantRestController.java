@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.EtudiantDTO;
 import tn.esprit.tp_foyer.Entities.Etudiant;
 import tn.esprit.tp_foyer.Services.IEtudiantService;
 
@@ -15,7 +16,7 @@ public class EtudiantRestController {
 
     // http://localhost:8089/tpfoyer/etudiant/retrieve-all-etudiants
     @GetMapping("/retrieve-all-etudiants")
-    public List<Etudiant> getEtudiants() {
+    public List<EtudiantDTO> getEtudiants() {
         return etudiantService.retrieveAllEtudiants();
     }
 

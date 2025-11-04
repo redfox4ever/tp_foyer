@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.FoyerDTO;
 import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Services.IFoyerService;
 
@@ -15,7 +16,7 @@ public class FoyerRestController {
 
     // http://localhost:8089/tpfoyer/foyer/retrieve-all-foyers
     @GetMapping("/retrieve-all-foyers")
-    public List<Foyer> getFoyers() {
+    public List<FoyerDTO> getFoyers() {
         return foyerService.retrieveAllFoyers();
     }
 

@@ -2,6 +2,7 @@ package tn.esprit.tp_foyer.Control;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tp_foyer.DTO.ReservationDTO;
 import tn.esprit.tp_foyer.Entities.Reservation;
 import tn.esprit.tp_foyer.Services.IReservationService;
 
@@ -15,7 +16,7 @@ public class ReservationRestController {
 
     // http://localhost:8089/tpfoyer/reservation/retrieve-all-reservations
     @GetMapping("/retrieve-all-reservations")
-    public List<Reservation> getReservations() {
+    public List<ReservationDTO> getReservations() {
         return reservationService.retrieveAllReservations();
     }
 
