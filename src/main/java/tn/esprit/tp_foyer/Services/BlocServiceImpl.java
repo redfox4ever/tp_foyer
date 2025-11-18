@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.Entities.Bloc;
+import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Mapper.BlocMapper;
 import tn.esprit.tp_foyer.Repositories.BlocRepository;
+import tn.esprit.tp_foyer.Repositories.FoyerRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BlocServiceImpl implements IBlocService {
     BlocRepository blocRepository;
+    FoyerRepository foyerRepository;
     private final BlocMapper blocMapper;
 
     public List<BlocDTO> retrieveAllBlocs() {
@@ -38,6 +41,30 @@ public class BlocServiceImpl implements IBlocService {
 
     public Bloc modifyBloc(Bloc bloc) {
         return blocRepository.save(bloc);
+    }
+
+    public Bloc addBlocWithFoyer(Bloc bloc) {
+        Foyer foyer = bloc.getFoyer();
+        foyer.getBlocs().add(bloc);
+        blocRepository.save(bloc);
+        foyerRepository.save(foyer);
+
+        return bloc;
+    }
+
+    public Bloc assignBlocToFoyer(long blocId, long foyerId) {
+        Bloc bloc = blocRepository.findById(blocId).get();
+        Foyer foyer = foyerRepository.findById(foyerId).get();
+        bloc.setFoyer(foyer);
+        blocRepository.save(bloc);
+        return bloc;
+    }
+
+    public Bloc unassignBlocToFoyer(long blocId) {
+        Bloc bloc = blocRepository.findById(blocId).get();
+        bloc.setFoyer(null);
+        blocRepository.save(bloc);
+        return bloc;
     }
 
     public static Set<BlocDTO> convertToDtoSet(Set<Bloc> blocs)

@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,5 +25,5 @@ public class Etudiant {
     String ecole;
     Date dateNaissance;
     @ManyToMany(mappedBy = "etudiants")
-    private Set<Reservation> reservations;
+    private Set<Reservation> reservations = new HashSet<>();;
 }

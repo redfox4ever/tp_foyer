@@ -1,5 +1,6 @@
 package tn.esprit.tp_foyer.Entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -18,6 +19,6 @@ public class Universite {
     long idUniversite;
     String nomUniversite;
     String adresse;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Foyer foyer;
 }

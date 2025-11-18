@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,6 @@ public class Reservation {
     Date anneeUniversitaire;
     boolean estValide;
     @ManyToMany
-    private Set<Etudiant> etudiants;
+    private Set<Etudiant> etudiants = new HashSet<>();;
 
 }

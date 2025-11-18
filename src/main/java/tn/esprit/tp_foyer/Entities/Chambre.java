@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,7 @@ public class Chambre {
     TypeChambre typeC;
     @ManyToOne
     private Bloc bloc;
-    @OneToMany
-    private Set<Reservation> reservations;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<>();;
 
 }

@@ -6,7 +6,12 @@ import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.DTO.ChambreDTO;
 import tn.esprit.tp_foyer.Entities.Bloc;
 import tn.esprit.tp_foyer.Entities.Chambre;
+import tn.esprit.tp_foyer.Entities.Foyer;
+import tn.esprit.tp_foyer.Entities.Reservation;
+import tn.esprit.tp_foyer.Mapper.BlocMapper;
+import tn.esprit.tp_foyer.Mapper.ChambreMapper;
 import tn.esprit.tp_foyer.Repositories.ChambreRepository;
+import tn.esprit.tp_foyer.Repositories.ReservationRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -16,10 +21,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ChambreServiceImpl implements IChambreService {
     ChambreRepository chambreRepository;
-
+    private final ChambreMapper chambreMapper;
+    ReservationRepository reservationRepository;
     public List<ChambreDTO> retrieveAllChambres() {  
         return chambreRepository.findAll().stream()
-                .map(ChambreServiceImpl::convertToDto)
+                .map(chambreMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -39,6 +45,31 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.save(chambre);
     }
 
+    public Chambre addChambreWithReservation(Chambre chambre) {
+        chambreRepository.save(chambre);
+        reservationRepository.saveAll(chambre.getReservations());
+        return chambre;
+    }
+
+    public Chambre assignReservationToChambre(String reservationId, long chambreId) {
+        Reservation reservation = reservationRepository.findById(reservationId).get();
+        Chambre chambre = chambreRepository.findById(chambreId).get();
+        chambre.getReservations().add(reservation);
+        chambreRepository.save(chambre);
+        return chambre;
+    }
+
+    public Chambre unassignReservationToChambre(String reservationId, long chambreId) {
+        Reservation reservation = reservationRepository.findById(reservationId).get();
+        Chambre chambre = chambreRepository.findById(chambreId).get();
+        chambre.getReservations().remove(reservation);
+        chambreRepository.save(chambre);
+        return chambre;
+    }
+
+
+
+
     public static Set<ChambreDTO> convertToDtoSet(Set<Chambre> chambres)
     {
         if (chambres == null) return Set.of();
@@ -48,6 +79,7 @@ public class ChambreServiceImpl implements IChambreService {
     }
     public static ChambreDTO convertToDto(Chambre chambre)
     {
+        if (chambre == null) return null;
         ChambreDTO chambreDTO = new ChambreDTO();
         chambreDTO.setNumeroChambre(chambre.getNumeroChambre());
         chambreDTO.setReservations(ReservationServiceImpl.convertToDtoSet(chambre.getReservations()));

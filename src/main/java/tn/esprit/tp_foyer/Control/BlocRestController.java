@@ -43,4 +43,23 @@ public class BlocRestController {
     public Bloc modifyBloc(@RequestBody Bloc b) {
         return blocService.modifyBloc(b);
     }
+
+
+    @PostMapping("/add-bloc-with-foyer")
+    public Bloc addBlocWithFoyer(@RequestBody Bloc bloc) {
+        return blocService.addBlocWithFoyer(bloc);
+    }
+
+    // Example URL: PUT http://localhost:8089/tpfoyer/bloc/assign/1/3
+    @PutMapping("/assign/{blocId}/{foyerId}")
+    public Bloc assignBlocToFoyer(@PathVariable long blocId, @PathVariable long foyerId) {
+        return blocService.assignBlocToFoyer(blocId, foyerId);
+    }
+
+    // Example URL: PUT http://localhost:8089/tpfoyer/bloc/unassign/1
+    @PutMapping("/unassign/{blocId}")
+    public Bloc unassignBlocToFoyer(@PathVariable long blocId) {
+        return blocService.unassignBlocToFoyer(blocId);
+    }
+
 }

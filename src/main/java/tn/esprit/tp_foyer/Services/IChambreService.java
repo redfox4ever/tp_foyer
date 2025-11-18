@@ -11,4 +11,7 @@ public interface IChambreService {
     public Chambre addChambre(Chambre c);
     public void removeChambre(Long chambreId);
     public Chambre modifyChambre(Chambre chambre);
+    public Chambre unassignReservationToChambre(String reservationId, long chambreId);
+    public Chambre assignReservationToChambre(String reservationId, long chambreId);
+    Chambre addChambreWithReservation(Chambre chambre);
 }

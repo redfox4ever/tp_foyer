@@ -43,4 +43,25 @@ public class ChambreRestController {
         Chambre chambre = chambreService.modifyChambre(c);
         return chambre;
     }
+
+    @PostMapping("/add-chambre-with-reservation")
+    public Chambre addChambreWithReservation(@RequestBody Chambre chambre) {
+        return chambreService.addChambreWithReservation(chambre);
+    }
+
+
+    // Example: PUT http://localhost:8089/tpfoyer/chambre/assign/RES123/5
+    @PutMapping("/assign/{reservationId}/{chambreId}")
+    public Chambre assignReservationToChambre(@PathVariable String reservationId,
+                                              @PathVariable long chambreId) {
+        return chambreService.assignReservationToChambre(reservationId, chambreId);
+    }
+
+
+    // Example: PUT http://localhost:8089/tpfoyer/chambre/unassign/RES123/5
+    @PutMapping("/unassign/{reservationId}/{chambreId}")
+    public Chambre unassignReservationToChambre(@PathVariable String reservationId,
+                                                @PathVariable long chambreId) {
+        return chambreService.unassignReservationToChambre(reservationId, chambreId);
+    }
 }
