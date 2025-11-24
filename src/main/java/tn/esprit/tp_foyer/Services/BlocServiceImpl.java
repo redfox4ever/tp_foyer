@@ -85,5 +85,26 @@ public class BlocServiceImpl implements IBlocService {
         return  blocDTO;
 
     }
+
+
+    public List<Bloc> findByFoyerIsNull()
+    {
+        return blocRepository.findByFoyerIsNull();
+    }
+
+    public List<Bloc> findByCapaciteBlocGreaterThan(long count)
+    {
+        return blocRepository.findByCapaciteBlocGreaterThan(count);
+    }
+
+    public List<Bloc> findByNomBlocStartingWith(String nomBloc)
+    {
+        return blocRepository.findByNomBlocStartingWith(nomBloc);
+    }
+
+    public List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String nomBloc, long count)
+    {
+        return blocRepository.findByNomBlocStartingWithAndCapaciteBlocGreaterThan(nomBloc,  count);
+    }
 }
 

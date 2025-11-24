@@ -13,4 +13,13 @@ public interface IBlocService {
     Bloc assignBlocToFoyer(long blocId, long foyerId);
     Bloc unassignBlocToFoyer(long blocId);
     Bloc addBlocWithFoyer(Bloc bloc);
+
+
+    List<Bloc> findByFoyerIsNull();
+
+    List<Bloc> findByCapaciteBlocGreaterThan(long count);
+
+    List<Bloc> findByNomBlocStartingWith(String nomBloc);
+
+    List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String nomBloc, long count);
 }

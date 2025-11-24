@@ -62,4 +62,10 @@ public class BlocRestController {
         return blocService.unassignBlocToFoyer(blocId);
     }
 
+    @GetMapping("/Test-Repo")
+    public List<Bloc> testRepo() {
+        return blocService.findByFoyerIsNull();
+    }
+
+
 }

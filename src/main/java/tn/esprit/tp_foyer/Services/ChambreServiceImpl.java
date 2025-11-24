@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.DTO.ChambreDTO;
-import tn.esprit.tp_foyer.Entities.Bloc;
-import tn.esprit.tp_foyer.Entities.Chambre;
-import tn.esprit.tp_foyer.Entities.Foyer;
-import tn.esprit.tp_foyer.Entities.Reservation;
+import tn.esprit.tp_foyer.Entities.*;
 import tn.esprit.tp_foyer.Mapper.BlocMapper;
 import tn.esprit.tp_foyer.Mapper.ChambreMapper;
 import tn.esprit.tp_foyer.Repositories.ChambreRepository;
@@ -91,5 +88,15 @@ public class ChambreServiceImpl implements IChambreService {
 
 
 
+    }
+
+    public List<Chambre> findByTypeC(TypeChambre typeC)
+    {
+        return  chambreRepository.findByTypeC(typeC);
+    }
+
+    public List<Chambre> findByNumeroChambre(long numeroChambre)
+    {
+        return chambreRepository.findByNumeroChambre(numeroChambre);
     }
 }
