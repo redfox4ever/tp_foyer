@@ -22,4 +22,5 @@ public interface IBlocService {
     List<Bloc> findByNomBlocStartingWith(String nomBloc);
 
     List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String nomBloc, long count);
+    void listeChambresParBloc();
 }

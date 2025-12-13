@@ -62,9 +62,28 @@ public class BlocRestController {
         return blocService.unassignBlocToFoyer(blocId);
     }
 
-    @GetMapping("/Test-Repo")
+    @GetMapping("/Test-Repo/findByFoyerIsNull")
     public List<Bloc> testRepo() {
         return blocService.findByFoyerIsNull();
+    }
+
+
+    @GetMapping("/Test-Repo/findByCapaciteBlocGreaterThan")
+    public List<Bloc> findByCapaciteBlocGreaterThan()
+    {
+        return blocService.findByCapaciteBlocGreaterThan(30);
+    }
+
+    @GetMapping("/Test-Repo/findByNomBlocStartingWith")
+    public List<Bloc> findByNomBlocStartingWith()
+    {
+        return blocService.findByNomBlocStartingWith("A");
+    }
+
+    @GetMapping("/Test-Repo/findByNomBlocStartingWithAndCapaciteBlocGreaterThan")
+    public List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan()
+    {
+        return blocService.findByNomBlocStartingWithAndCapaciteBlocGreaterThan("A",  30);
     }
 
 

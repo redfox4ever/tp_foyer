@@ -1,9 +1,13 @@
 package tn.esprit.tp_foyer.Services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.Entities.Bloc;
+import tn.esprit.tp_foyer.Entities.Chambre;
 import tn.esprit.tp_foyer.Entities.Foyer;
 import tn.esprit.tp_foyer.Mapper.BlocMapper;
 import tn.esprit.tp_foyer.Repositories.BlocRepository;
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class BlocServiceImpl implements IBlocService {
     BlocRepository blocRepository;
     FoyerRepository foyerRepository;
@@ -105,6 +110,27 @@ public class BlocServiceImpl implements IBlocService {
     public List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String nomBloc, long count)
     {
         return blocRepository.findByNomBlocStartingWithAndCapaciteBlocGreaterThan(nomBloc,  count);
+    }
+
+    @Scheduled(cron = "* * * * * *")
+    @Transactional
+    public void listeChambresParBloc()
+    {
+        List<Bloc> blocs =  blocRepository.findAll();
+
+        for(Bloc bloc : blocs)
+        {
+            log.info("Bloc => Ayant une capacite "+ bloc.getCapaciteBloc());
+            log.info("la liste des chambres pour ce bloc:");
+            Set<Chambre> chambres = bloc.getChambres();
+            for(Chambre chambre : chambres)
+            {
+                log.info("Numchambre: "+chambre.getNumeroChambre() +" type: "+chambre.getTypeC());
+
+            }
+            log.info("************************");
+
+        }
     }
 }
 

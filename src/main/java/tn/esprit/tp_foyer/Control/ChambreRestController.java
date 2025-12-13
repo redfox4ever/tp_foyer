@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.tp_foyer.DTO.ChambreDTO;
 import tn.esprit.tp_foyer.Entities.Chambre;
 
+import tn.esprit.tp_foyer.Entities.TypeChambre;
 import tn.esprit.tp_foyer.Services.IChambreService;
 
 import java.util.List;
@@ -63,5 +64,23 @@ public class ChambreRestController {
     public Chambre unassignReservationToChambre(@PathVariable String reservationId,
                                                 @PathVariable long chambreId) {
         return chambreService.unassignReservationToChambre(reservationId, chambreId);
+    }
+
+    @GetMapping("/Test-Repo/findByTypeC")
+    public List<Chambre> findByTypeC(@RequestParam TypeChambre typeC)
+    {
+        return  chambreService.findByTypeC(typeC);
+    }
+
+    @GetMapping("/Test-Repo/findByNumeroChambre")
+    public List<Chambre> findByNumeroChambre(@RequestParam long numeroChambre)
+    {
+        return chambreService.findByNumeroChambre(numeroChambre);
+    }
+
+    @GetMapping("/Test-Repo/findChambreByEtudiantCin")
+    public Chambre findChambreByEtudiantCin(@RequestParam long cin)
+    {
+        return chambreService.findChambreByEtudiantCin(cin);
     }
 }

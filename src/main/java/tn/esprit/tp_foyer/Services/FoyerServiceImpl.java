@@ -17,10 +17,8 @@ import java.util.stream.Collectors;
 public class FoyerServiceImpl implements IFoyerService {
     FoyerRepository foyerRepository;
 
-    public List<FoyerDTO> retrieveAllFoyers() {
-        return foyerRepository.findAll().stream()
-                .map(FoyerServiceImpl::convertToDto)
-                .collect(Collectors.toList());
+    public List<Foyer> retrieveAllFoyers() {
+        return foyerRepository.findAll();
     }
 
     public Foyer retrieveFoyer(Long foyerId) {

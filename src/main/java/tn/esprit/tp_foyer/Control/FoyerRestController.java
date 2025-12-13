@@ -16,7 +16,7 @@ public class FoyerRestController {
 
     // http://localhost:8089/tpfoyer/foyer/retrieve-all-foyers
     @GetMapping("/retrieve-all-foyers")
-    public List<FoyerDTO> getFoyers() {
+    public List<Foyer> getFoyers() {
         return foyerService.retrieveAllFoyers();
     }
 

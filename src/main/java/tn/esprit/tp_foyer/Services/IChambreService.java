@@ -19,4 +19,8 @@ public interface IChambreService {
     List<Chambre> findByTypeC(TypeChambre typeC);
 
     List<Chambre> findByNumeroChambre(long numeroChambre);
+
+    void pourcentageChambreParTypeChambre();
+    Chambre findChambreByEtudiantCin(long cin);
+
 }

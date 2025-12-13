@@ -1,6 +1,9 @@
 package tn.esprit.tp_foyer.Services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp_foyer.DTO.BlocDTO;
 import tn.esprit.tp_foyer.DTO.ChambreDTO;
@@ -13,9 +16,11 @@ import tn.esprit.tp_foyer.Repositories.ReservationRepository;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import tn.esprit.tp_foyer.Entities.TypeChambre;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ChambreServiceImpl implements IChambreService {
     ChambreRepository chambreRepository;
     private final ChambreMapper chambreMapper;
@@ -99,4 +104,26 @@ public class ChambreServiceImpl implements IChambreService {
     {
         return chambreRepository.findByNumeroChambre(numeroChambre);
     }
+
+    @Scheduled(cron = "0 */5 * * * *")
+    public void pourcentageChambreParTypeChambre()
+    {
+        long numberOfRooms = chambreRepository.findAll().stream().count();
+        long numberOfSimpleRooms = chambreRepository.findByTypeC(TypeChambre.SIMPLE).stream().count();
+        long numberOfDoubleRooms = chambreRepository.findByTypeC(TypeChambre.DOUBLE).stream().count();
+        long numberOfTripleRooms = chambreRepository.findByTypeC(TypeChambre.TRIPLE).stream().count();
+
+
+        log.info("Nomre total des chambres: "+ numberOfRooms);
+
+        log.info("Le pourcentage de type SIMPLE: "+ numberOfSimpleRooms/numberOfRooms * 100);
+        log.info("Le pourcentage de type DOUBLE: "+ numberOfDoubleRooms/numberOfRooms * 100);
+        log.info("Le pourcentage de type TRIPLE: "+ numberOfTripleRooms/numberOfRooms * 100);
+    }
+
+    public Chambre findChambreByEtudiantCin(long cin)
+    {
+        return chambreRepository.findChambreByEtudiantCin(cin);
+    }
+
 }
